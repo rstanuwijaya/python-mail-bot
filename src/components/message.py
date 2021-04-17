@@ -1,11 +1,12 @@
 #%%
+import json
+import os
+
 from pathlib import Path
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
-import json
-import os
 
 Messages = []
 filepath = os.path.dirname(os.path.abspath(__file__))
