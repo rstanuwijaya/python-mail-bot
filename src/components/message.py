@@ -1,12 +1,17 @@
 #%%
 import json
 import os
+import dotenv
 
 from pathlib import Path
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
+
+dotenv.load_dotenv()
+EMAIL_ADDRESS = os.getenv('EMAIL_ADDRESS')
+EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
 Messages = []
 filepath = os.path.dirname(os.path.abspath(__file__))
@@ -20,11 +25,12 @@ for mail in MailingList:
     msg = MIMEMultipart()
 
     msg['Subject'] = f'Test Subject'
-    msg['From'] = 'rstanuwijaya@connect.ust.hk'
-    msg['To'] = mail['email_addrs']
+    msg['From'] = EMAIL_ADDRESS
+    msg['To'] = mail['To']
+    # msg['Cc'] = mail['Cc']
 
     attachements = [
-        r'\attachment\CV_Randy Stefan Tanuwijaya.pdf'
+        r'\attachment\sample_attachment.txt'
     ]
 
     for path in attachements:
@@ -37,9 +43,9 @@ for mail in MailingList:
         msg.attach(part)
 
     text = f"""\
-    mari makan tai at {mail['company_name']}.
+    Example text.  {mail['company_name']}.
     """
-
+    
     msg.attach(MIMEText(text))
     Messages.append(msg)
 # %%
