@@ -11,7 +11,6 @@ from email import encoders
 
 dotenv.load_dotenv()
 EMAIL_ADDRESS = os.getenv('EMAIL_ADDRESS')
-EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
 Messages = []
 filepath = os.path.dirname(os.path.abspath(__file__))
@@ -45,7 +44,7 @@ for mail in MailingList:
     text = f"""\
     Example text.  {mail['company_name']}.
     """
-    
+
     msg.attach(MIMEText(text))
     Messages.append(msg)
 # %%

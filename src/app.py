@@ -2,6 +2,7 @@
 import smtplib, ssl
 import dotenv
 import os
+import base64
 
 import components.message
 import importlib
@@ -15,7 +16,7 @@ EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 port = 587  
 smtp_server = "outlook.office365.com"
 sender_email = EMAIL_ADDRESS
-password = EMAIL_PASSWORD
+password = base64.b64decode(EMAIL_PASSWORD.encode()).decode()
 
 context = ssl.create_default_context()
 with smtplib.SMTP(smtp_server, port) as server:
